@@ -1,0 +1,44 @@
+# ══════════════════════════════════════════════════════════════
+#  Kubernetes Deployment — Cartera Fiscal
+#  Proyecto Integrador DevOps · Tecmilenio
+# ══════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cartera-fiscal
+  labels:
+    app: cartera-fiscal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cartera-fiscal
+  template:
+    metadata:
+      labels:
+        app: cartera-fiscal
+    spec:
+      containers:
+        - name: cartera-fiscal
+          image: lu0jaime/cartera-fiscal:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXT_PUBLIC_SUPABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-secret
+                  key: supabase-url
+            - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: supabase-secret
+                  key: supabase-anon-key
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

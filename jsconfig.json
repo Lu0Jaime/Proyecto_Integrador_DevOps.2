@@ -3,6 +3,5 @@
     "paths": {
       "@/*": ["./*"]
     }
-  },
-  "extends": "next/tsconfig"
+  }
 }

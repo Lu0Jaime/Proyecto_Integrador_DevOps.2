@@ -1,0 +1,27 @@
+# ══════════════════════════════════════════════════════════════
+#  Helm Values — Cartera Fiscal
+#  Valores por defecto configurables del chart
+# ══════════════════════════════════════════════════════════════
+
+replicaCount: 1
+
+image:
+  repository: lu0jaime/cartera-fiscal
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 3000
+  nodePort: 30080
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+secretName: supabase-secret
